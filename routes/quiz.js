@@ -6,7 +6,31 @@ const router = express.Router();
 
 //Work goes here
 
+router.get("/", (req, res) =>{
+    //Get 4 words, with their pos and def and send back to the other page
 
+    //send thoose back and render quiz.ejs
+});
+
+let getwords = async ()=>{
+    //get a random part of speech
+    let randomPart = getRandomPart();
+    //from that, pick 4 words that match
+
+}
+let getRandomPart =()=>{
+    let parts = ['noun', 'verb','adjective']
+    let randomIndex = Math.floor(Math.random()*parts.length);
+    let randomPart = parts[randomIndex];
+    return randomPart;
+}
+let shuffle = (array)=>{
+    for(let i = 0;i<array.length-1;i--)
+    {
+        let randomNumber = Math.floor(Math,random()*(i+1));
+        [array[i], array[randomNumber]] = [array[randomNumber], array[i]];
+    }
+}
 
 
 module.exports = router;
