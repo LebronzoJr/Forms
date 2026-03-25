@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
 const userRouter = require('./routes/users');
-
+const quizRouter = require('./routes/quiz');
 
 app.set ('view enjine', 'ejs');
 app.use(express.static("public"));
@@ -9,6 +9,9 @@ app.use(express.static("public"));
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());
 app.use('/users', userRouter);
+
+app.use('/users,', userRouter);
+app.use('/quiz', quizRouter);
 
 app.get('/adder', (req,res)=>{
     console.log('Adder');
