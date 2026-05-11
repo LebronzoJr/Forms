@@ -12,7 +12,7 @@ router.get("/", async (req, res) =>{
 });
 router.post("/", async (req,res)=>{
     console.log(req.body);
-    let {userChoice, correctDef, totalQuestions, totalCorrect} = req.body;
+    let {userChoice, correctDef, totalQuestions, totalCorrect, lastChoice, lastCorrect} = req.body;
     let score = parseInt(totalCorrect);
     if(userChoice === correctDef)
     {
@@ -21,14 +21,17 @@ router.post("/", async (req,res)=>{
     }
     let total = parseInt(totalQuestions)+1;
     totalQuestions++
-
+    let lChoice = userChoice;
+    let lCorrect = correctDef;
     let chosenWords = await getWords();
     console.log("Chosen Words: ", chosenWords)
 
     res.render('quiz', {
         chosenWords,
         totalQuestions: total,
-        totalCorrect: score
+        totalCorrect: score,
+        lastChoice: lChoice,
+        lastCorrect: lCorrect
     });
 });
 

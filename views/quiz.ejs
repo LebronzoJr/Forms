@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <style>
+        .correct {color: lawngreen;}
+        .incorrect {color: salmon;}
+    </style>
 
     <title>Document</title>
 </head>
@@ -8,6 +12,8 @@
     <% 
         let questionCount = locals.totalQuestions ?? 0;
         let score = locals.totalCorrect ?? 0;
+        let lChoice = locals.lastChoice ?? null;
+        let lCorrect = locals.lastCorrect ?? null;
         let randomIndex = parseInt(Math.random()*chosenWords.length); 
         let chosenWord = chosenWords[randomIndex]; 
         let [correctWord, correctPart, correctDef] = chosenWord.split('\t');
@@ -37,7 +43,19 @@
         <input type="hidden" name="correctDef" value="<%= correctDef %>">
         <input type="hidden" name="totalQuestions" value="<%= questionCount %>">
         <input type="hidden" name="totalCorrect" value="<%= score %>">
+        <input type="hidden" name="lastChoice" value="<%= lChoice %>">
+        <input type="hidden" name="lastCorrect" value="<%= lCorrect %> ">
     </form>
 
+    <% if (lChoice != null && lChoice == lCorrect) { %>
+        <h2>The last correct def was: <span class="correct"><p><%= lastCorrect %></p></span> </h2>
+    <% } else if (lChoice != null && lChoice != lCorrect) { %>
+        <h2>The last correct def was: <span class="correct"><p><%= lastCorrect %></p></span></h2>
+        <h2>Your last answer was: <span class="incorrect"><p><%= lastChoice %></p></span></h2>
+    <% } %> 
+
+     
 </body>
+
+
 </html>
